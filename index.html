@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tawsilex | Nouvelle expédition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside><small>AGENCE ACTIVE</small>
+        <div class="agency">⌖ <span><strong>Casablanca</strong><em>Bvd Al Qods</em></span>⌄</div>
+        <nav><a href="#dashboard"><span class="nav-icon">▦</span><span>Tableau de bord</span></a><a class="active" href="#form"><span class="nav-icon">＋</span><span>Nouvelle expédition</span></a><a href="#expeditions"><span class="nav-icon">▤</span><span>Mes expéditions</span><i
+                    id="count">2</i></a></nav>
+        <footer><a href="tel:+212661498564"> Besoin d’aide ❔</a><br><br><button id="settingsButton" type="button">⚙ Paramètres</button>
+            <hr><b>AM</b> Agent Casa
+        </footer>
+    </aside>
+    <main>
+        <header><a class="top-logo" aria-label="Tawsilex"><img src="logo-22.png" alt="Tawsilex — Nos partenaires, notre force"></a><div class="breadcrumbs"><span>Agence Casablanca</span></div></header>
+        <section class="title" id="dashboard">
+            <div>
+                <p>GESTION DES COLIS</p>
+                <h1>Nouvelle expédition</h1><small>Ajoutez un colis au système depuis l’agence de Casablanca.</small>
+            </div>
+            <div class="open">☀ Agence ouverte<br><b>09:00 — 18:00</b></div>
+        </section>
+        <section class="grid">
+            <form id="form">
+                <div class="formhead"><strong>▣</strong>
+                    <div>
+                        <h2>Informations du destinataire</h2>
+                        <p>Indiquez les coordonnées de la personne qui recevra le colis.</p>
+                    </div>
+                </div>
+                <div class="fields"><label>Nom complet <b>*</b><input id="name" required
+                            placeholder="Ex. Nom Prénom"></label><label>Numéro de téléphone <b>*</b><input
+                            id="phone" required type="tel" placeholder="Ex. 06 12 34 56 78"></label><label>Ville de
+                        destination <b>*</b><select id="city" required>
+                            <option value="">Sélectionnez une ville</option>
+                            <option>Rabat</option>
+                            <option>Marrakech</option>
+                            <option>Tanger</option>
+                            <option>Fès</option>
+                            <option>Agadir</option>
+                            <option>Oujda</option>
+                        </select></label><label>Adresse complète <b>*</b><input id="address" required
+                            placeholder="Quartier, rue, numéro…"></label></div>
+                <hr>
+                <div class="formhead"><strong class="orange">□</strong>
+                    <div>
+                        <h2>Détails du colis</h2>
+                        <p>Ces informations aident à assurer une livraison adaptée.</p>
+                    </div>
+                </div>
+                <div class="fields"><label>Type de colis<select>
+                            <option>Colis standard</option>
+                            <option>Document</option>
+                            <option>Fragile</option>
+                        </select></label><label>Poids estimé<select>
+                            <option>Moins de 1 kg</option>
+                            <option>1 à 3 kg</option>
+                            <option>3 à 5 kg</option>
+                        </select></label></div>
+                <div class="buttons"><button type="reset">Annuler</button><button type="submit">Ajouter
+                        l’expédition　→</button></div>
+            </form>
+            <article class="summary">
+                <div class="illustration" role="img" aria-label="Un camion orange transporte des colis vers sa destination">
+                    <svg viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+                        <path class="route" d="M22 91 C78 66 112 112 168 87 S244 66 286 88" />
+                        <circle class="route-dot" cx="28" cy="87" r="5" />
+                        <path class="destination" d="M280 65c0-11 8-19 18-19s18 8 18 19c0 14-18 31-18 31s-18-17-18-31Z" />
+                        <circle cx="298" cy="65" r="6" fill="#fff" />
+                        <g class="delivery-truck">
+                            <rect x="98" y="49" width="76" height="38" rx="5" fill="#f47a42" />
+                            <path d="M174 60h25l18 17v10h-43Z" fill="#e96d38" />
+                            <path d="M181 65h14l12 12h-26Z" fill="#dff1fa" />
+                            <rect x="108" y="57" width="23" height="20" rx="2" fill="#fff3e9" />
+                            <path d="m122 59-9 10h6l-2 8 10-12h-6l3-6Z" fill="#f47a42" stroke="#f47a42" stroke-linejoin="round" />
+                            <circle cx="119" cy="89" r="9" fill="#173b58" /><circle cx="119" cy="89" r="4" fill="#fff" />
+                            <circle cx="197" cy="89" r="9" fill="#173b58" /><circle cx="197" cy="89" r="4" fill="#fff" />
+                            <path d="M145 43h9m-1-5 5 5-5 5" fill="none" stroke="#f47a42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                    </svg>
+                </div>
+                <h2>Départ depuis<br><b>Casablanca</b></h2>
+                <p>Votre colis sera pris en charge par notre agence puis acheminé vers sa destination.</p>
+                <hr>
+                <p>⌖　<strong>Point de départ</strong><br>　　 Agence Tawsilex — Casa</p>
+                <p>⏱　<strong>Délai estimé</strong><br>　　 24h à 48h ouvrées</p>
+                <p>♙　<strong>Assistance</strong><br>　　 Disponible 7j/7</p><a href="#tarifs">Consulter les tarifs →</a>
+            </article>
+        </section>
+        <section class="rates" id="tarifs">
+            <div class="rates-heading"><div><p>TARIFS DE LIVRAISON</p><h2>Consultez les tarifs par destination</h2>
+                <small>Tarifs affichés sur le site Tawsilex, en DH par colis. Recherchez une ville pour vérifier son tarif.</small></div>
+                <label class="rate-search">Rechercher une ville<input id="rateSearch" type="search" placeholder="Ex. Rabat, Fès…" aria-label="Rechercher une ville dans les tarifs"></label></div>
+            <div class="rate-tiers" aria-label="Tranches de tarifs">
+                <div><span>Casablanca</span><strong>20 <small>DH</small></strong></div>
+                <div><span>Villes principales</span><strong>35 <small>DH</small></strong><small>Ex. Rabat, Marrakech, Tanger, Agadir</small></div>
+                <div><span>Destinations régionales</span><strong>40 <small>DH</small></strong><small>Ex. Fès, Oujda, Safi, Nador</small></div>
+                <div><span>Autres destinations</span><strong>45 <small>DH</small></strong><small>Nombreuses villes et villages</small></div>
+                <div><span>Zones spécifiques</span><strong>50 <small>DH</small></strong><small>Ex. Gourrama, Mejjat, Bhalil</small></div>
+            </div>
+            <div class="rate-results" id="rateResults" aria-live="polite"></div>
+            <p class="rate-note">Les prix peuvent varier selon la destination et évoluer. Vérifiez le tarif final auprès de Tawsilex avant l’envoi. <a href="https://tawsilex.com/#tarif" target="_blank" rel="noopener noreferrer">Source : tawsilex.com</a></p>
+        </section>
+        <section class="list" id="expeditions">
+            <p>AUJOURD’HUI</p>
+            <h2>Dernières expéditions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>RÉFÉRENCE</th>
+                        <th>DESTINATAIRE</th>
+                        <th>DESTINATION</th>
+                        <th>ADRESSE</th>
+                        <th>STATUT</th>
+                    </tr>
+                </thead>
+                <tbody id="rows">
+                    <tr>
+                        <td>#TX-10284</td>
+                        <td><b>Omar Benali</b><small>06 44 18 26 90</small></td>
+                        <td>Rabat</td>
+                        <td>Agdal, rue Oued Ziz</td>
+                        <td><i>En transit</i></td>
+                    </tr>
+                    <tr>
+                        <td>#TX-10283</td>
+                        <td><b>Yasmine A.</b><small>06 11 22 33 44</small></td>
+                        <td>Marrakech</td>
+                        <td>Guéliz, Av. Mohammed VI</td>
+                        <td><i>Prêt au départ</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <dialog id="settingsDialog" aria-labelledby="settingsTitle">
+        <div class="dialog-head"><h2 id="settingsTitle">Paramètres de l’agence</h2><button id="closeSettings" type="button" aria-label="Fermer">×</button></div>
+        <p><strong>Agence active</strong><br>Casablanca — Bvd Al Qods</p>
+        <p><strong>Agent connecté</strong><br>Agent Casa</p>
+        <p><strong>Assistance Tawsilex</strong><br><a href="tel:+212661498564">+212 661 498 564</a></p>
+    </dialog>
+    <div id="toast">✓ <span><b>Expédition ajoutée</b><small>Le colis est enregistré dans le système.</small></span>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
