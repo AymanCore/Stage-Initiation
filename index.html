@@ -22,7 +22,7 @@
         </footer>
     </aside>
     <main>
-        <header><a class="top-logo" aria-label="Tawsilex"><img src="logo-22.png" alt="Tawsilex — Nos partenaires, notre force"></a><div class="breadcrumbs"><span>Agence Casablanca</span></div></header>
+        <header><a class="top-logo" aria-label="Tawsilex"><img src="logo-22.png" alt="Tawsilex — Nos partenaires, notre force"></a><div class="breadcrumbs"><span>Agence Casablanca</span></div><button id="signOutButton" class="signout" type="button" hidden>Déconnexion</button></header>
         <section class="title" id="dashboard">
             <div>
                 <p>GESTION DES COLIS</p>
@@ -58,11 +58,11 @@
                         <p>Ces informations aident à assurer une livraison adaptée.</p>
                     </div>
                 </div>
-                <div class="fields"><label>Type de colis<select>
+                <div class="fields"><label>Type de colis<select id="packageType">
                             <option>Colis standard</option>
                             <option>Document</option>
                             <option>Fragile</option>
-                        </select></label><label>Poids estimé<select>
+                        </select></label><label>Poids estimé<select id="packageWeight">
                             <option>Moins de 1 kg</option>
                             <option>1 à 3 kg</option>
                             <option>3 à 5 kg</option>
@@ -149,8 +149,21 @@
         <p><strong>Agent connecté</strong><br>Agent Casa</p>
         <p><strong>Assistance Tawsilex</strong><br><a href="tel:+212661498564">+212 661 498 564</a></p>
     </dialog>
+    <section id="databaseGate" class="database-gate" hidden aria-labelledby="databaseGateTitle">
+        <form id="signInForm" class="sign-in-form">
+            <img src="logo-22.png" alt="Tawsilex" class="sign-in-logo">
+            <h1 id="databaseGateTitle">Connexion de l’agence</h1>
+            <p>Connectez-vous avec le compte agent pour accéder aux expéditions.</p>
+            <label>Adresse e-mail<input id="agentEmail" type="email" autocomplete="username" required></label>
+            <label>Mot de passe<input id="agentPassword" type="password" autocomplete="current-password" required></label>
+            <button type="submit">Se connecter</button>
+            <p id="signInMessage" class="sign-in-message" role="status" aria-live="polite"></p>
+        </form>
+    </section>
     <div id="toast">✓ <span><b>Expédition ajoutée</b><small>Le colis est enregistré dans le système.</small></span>
     </div>
+    <script src="supabase-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>
 
