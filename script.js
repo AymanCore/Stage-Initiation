@@ -190,6 +190,25 @@ const publishedRates = [
     { price: 45, cities: ['Tiznit','Tinghir','Tata','Taroudant','Sidi slimane','Taourirt','Taza','Dakhla','Chefchaouen','Guelmim','Errachidia','Ouarzazate','Khenifra','Ifrane','Midelt','Saidia','Al hoceima','Youssoufia'] },
     { price: 50, cities: ['Gourrama','Mejjat - Chichaoua','Bhalil - Sefrou','Kassita - Driouch','Tamesmane - Driouch','Tounfite','Oulad Abbou','Oulad Said - Settat','Guisser','Imi Ouaddar'] }
 ];
+const citySelect = document.querySelector('#city');
+const normalizeCityName = city => city.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr');
+const cityOptions = new Map(
+    [...citySelect.options].slice(1).map(option => [normalizeCityName(option.value), option])
+);
+publishedRates.flatMap(group => group.cities).forEach(city => {
+    const key = normalizeCityName(city);
+    if (!cityOptions.has(key)) {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityOptions.set(key, option);
+    }
+});
+const cityPlaceholder = citySelect.options[0];
+citySelect.replaceChildren(
+    cityPlaceholder,
+    ...[...cityOptions.values()].sort((a, b) => a.textContent.localeCompare(b.textContent, 'fr'))
+);
 rateSearch.addEventListener('input', () => {
     const query = rateSearch.value.trim().toLocaleLowerCase('fr');
     rateResults.replaceChildren();
