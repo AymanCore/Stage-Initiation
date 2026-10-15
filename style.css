@@ -16,3 +16,4 @@ nav a{display:flex;align-items:center;gap:8px;min-height:46px;text-align:left}na
 /* Logo centré dans la barre supérieure; le bouton reste aligné à droite. */
 header{justify-content:center}.top-logo{position:absolute;left:50%;transform:translateX(-50%)}.signout{position:absolute;right:28px}
 @media(max-width:520px){.signout{right:10px;padding:7px 9px}}
+.currency-icon{font-size:10px!important;font-weight:700}
