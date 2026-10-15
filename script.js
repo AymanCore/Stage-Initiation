@@ -11,6 +11,9 @@ const databaseEnabled = Boolean(config.url && config.publishableKey);
 let supabaseClient = null;
 let nextDemoReference = 10285;
 let toastTimer;
+let shipmentsLoadPromise = null;
+let isAgentSignedIn = false;
+let sessionVersion = 0;
 
 function notify(title, detail, isError = false) {
     toast.querySelector('b').textContent = title;
@@ -22,7 +25,10 @@ function notify(title, detail, isError = false) {
 }
 
 function addShipmentRow(shipment, prepend = true) {
+    if (shipment.reference && [...rows.querySelectorAll('tr')]
+        .some(existingRow => existingRow.dataset.reference === shipment.reference)) return;
     const row = document.createElement('tr');
+    row.dataset.reference = shipment.reference || '';
     const reference = document.createElement('td');
     reference.textContent = shipment.reference;
     const recipientCell = document.createElement('td');
@@ -44,25 +50,48 @@ function addShipmentRow(shipment, prepend = true) {
     else rows.append(row);
 }
 
-function setDatabaseAccess(isSignedIn) {
-    databaseGate.hidden = isSignedIn;
-    signOutButton.hidden = !isSignedIn;
+function setDatabaseAccess(session) {
+    const signedIn = Boolean(session);
+    if (isAgentSignedIn !== signedIn) {
+        isAgentSignedIn = signedIn;
+        sessionVersion++;
+    }
+    databaseGate.hidden = signedIn;
+    signOutButton.hidden = !signedIn;
+    if (!signedIn) {
+        rows.replaceChildren();
+        count.textContent = '0';
+    }
 }
 
 async function loadShipments() {
+    if (shipmentsLoadPromise) return shipmentsLoadPromise;
+    const requestedSessionVersion = sessionVersion;
     rows.replaceChildren();
     count.textContent = '0';
-    const { data, error } = await supabaseClient
-        .from('shipments')
-        .select('id, reference, recipient_name, recipient_phone, destination_city, full_address, status, created_at')
-        .order('created_at', { ascending: false })
-        .limit(100);
-    if (error) {
-        notify('Chargement impossible', 'Vérifiez les règles d’accès de la base de données.', true);
-        return;
+    shipmentsLoadPromise = (async () => {
+        const { data, error } = await supabaseClient
+            .from('shipments')
+            .select('id, reference, recipient_name, recipient_phone, destination_city, full_address, status, created_at')
+            .order('created_at', { ascending: false })
+            .limit(100);
+        if (requestedSessionVersion !== sessionVersion || !isAgentSignedIn) return;
+        if (error) {
+            notify('Chargement impossible', 'Vérifiez les règles d’accès de la base de données.', true);
+            return;
+        }
+        const uniqueShipments = new Map(data.map(shipment => [shipment.reference, shipment]));
+        uniqueShipments.forEach(shipment => addShipmentRow(shipment, false));
+        count.textContent = String(uniqueShipments.size);
+    })();
+    try {
+        await shipmentsLoadPromise;
+    } finally {
+        shipmentsLoadPromise = null;
+        if (isAgentSignedIn && requestedSessionVersion !== sessionVersion) {
+            void loadShipments();
+        }
     }
-    data.forEach(shipment => addShipmentRow(shipment, false));
-    count.textContent = String(data.length);
 }
 
 if (databaseEnabled) {
@@ -93,21 +122,16 @@ if (databaseEnabled) {
             if (error) notify('Déconnexion impossible', 'Réessayez dans un instant.', true);
         });
         supabaseClient.auth.onAuthStateChange((_event, session) => {
-            setDatabaseAccess(Boolean(session));
+            setDatabaseAccess(session);
             if (session) queueMicrotask(() => loadShipments());
-            else {
-                rows.replaceChildren();
-                count.textContent = '0';
-            }
         });
         supabaseClient.auth.getSession().then(({ data, error }) => {
             if (error) {
                 signInMessage.textContent = 'Impossible de vérifier la session. Rechargez la page.';
                 return;
             }
-            setDatabaseAccess(Boolean(data.session));
+            setDatabaseAccess(data.session);
             if (data.session) loadShipments();
-            else rows.replaceChildren();
         });
     }
 }
