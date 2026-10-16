@@ -228,6 +228,13 @@ document.querySelectorAll('nav a[href^="#"]').forEach(link => link.addEventListe
     document.querySelectorAll('nav a').forEach(item => item.classList.remove('active'));
     link.classList.add('active');
 }));
+const menuToggle = document.querySelector('#menuToggle');
+const sideMenu = document.querySelector('#sideMenu');
+menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+    sideMenu.hidden = expanded;
+});
 document.querySelector('#settingsButton').addEventListener('click', () => settingsDialog.showModal());
 document.querySelector('#closeSettings').addEventListener('click', () => settingsDialog.close());
 settingsDialog.addEventListener('click', event => { if (event.target === settingsDialog) settingsDialog.close(); });
